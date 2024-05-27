@@ -285,6 +285,7 @@ class BinaryData:
                 writer.write(value_JudgeLine.ctrl_obj, "CtrlObject")
                 writer.write(value_JudgeLine.incline, "Anim:Float")
                 writer.write(value_JudgeLine.z_index, "Int")
+                return
             case "ChartSettings":
                 value_ChartSettings: PhiraChartSettings = value
                 writer.write(value_ChartSettings.pe_alpha_extension, "Bool")
