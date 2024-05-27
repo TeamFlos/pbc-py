@@ -1,6 +1,6 @@
 [project]
 name = "pbc_sjfhsjfh"
-version = "0.0.3"
+version = "0.0.4"
 authors = [{ name = "sjfhsjfh", email = "sjfhsjfh@qq.com" }]
 description = "Phira chart structure package"
 readme = "README.md"
