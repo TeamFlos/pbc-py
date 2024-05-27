@@ -212,6 +212,8 @@ class BinaryData:
                 if res.next:
                     res.next = read_opt(reader)
                 return res
+            return read_opt(reader)
+
         raise ValueError(f"Invalid type {T}")
 
     @staticmethod
@@ -318,6 +320,8 @@ class BinaryData:
                 else:
                     writer.write_val(0, "Byte")
                     break
+            return
+
         raise ValueError(f"Invalid type {T}")
 
 
