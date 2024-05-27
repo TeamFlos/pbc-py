@@ -19,6 +19,7 @@ class PhiraKeyFrame(Generic[T]):
         """
         self.time = time
         self.value = value
+        self.tween = tween
 
 
 class PhiraAnim(Generic[T]):
