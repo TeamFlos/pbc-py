@@ -106,6 +106,7 @@ class BinaryData:
                                  reader.read("Anim:Float")),
                 )
             case "CtrlObject":
+                assert reader.read("Byte") == 8
                 return PhiraControlObject(
                     alpha=reader.read("Anim:Float"),
                     size=reader.read("Anim:Float"),
@@ -248,6 +249,7 @@ class BinaryData:
                 return
             case "CtrlObject":
                 value_CtrlObject: PhiraControlObject = value
+                writer.write(8, "Byte")
                 writer.write(value_CtrlObject.alpha, "Anim:Float")
                 writer.write(value_CtrlObject.size, "Anim:Float")
                 writer.write(value_CtrlObject.pos, "Anim:Float")
