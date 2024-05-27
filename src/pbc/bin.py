@@ -152,7 +152,7 @@ class BinaryData:
                 object = reader.read("Object")
                 kind = ["normal", "texture", "text",
                         "paint"][reader.read("Byte")]
-                height = reader.read("Float")
+                height = reader.read("Anim:Float")
                 notes = reader.array("Note")
                 color = reader.read("Color")
                 parentB = reader.uleb()
@@ -274,7 +274,7 @@ class BinaryData:
                 writer.write(value_JudgeLine.object, "Object")
                 writer.write(["normal", "texture", "text",
                               "paint"].index(value_JudgeLine.kind), "Byte")
-                writer.write(value_JudgeLine.height, "Float")
+                writer.write(value_JudgeLine.height, "Anim:Float")
                 writer.array(value_JudgeLine.notes, "Note")
                 writer.write(value_JudgeLine.color, "Color")
                 writer.uleb(value_JudgeLine.parent +
