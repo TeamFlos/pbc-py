@@ -252,6 +252,7 @@ class BinaryData:
                 writer.write(value_CtrlObject.size, "Anim:Float")
                 writer.write(value_CtrlObject.pos, "Anim:Float")
                 writer.write(value_CtrlObject.y, "Anim:Float")
+                return
             case "Note":
                 value_Note: PhiraNote = value
                 writer.write(value_Note.object, "Object")
