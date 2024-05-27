@@ -154,7 +154,7 @@ class BinaryData:
                         "paint"][reader.read("Byte")]
                 height = reader.read("Anim:Float")
                 notes = reader.array("Note")
-                color = reader.read("Color")
+                color = reader.read("Anim:Color")
                 parentB = reader.uleb()
                 parent = None
                 show_below = reader.read("Bool")
@@ -276,7 +276,7 @@ class BinaryData:
                               "paint"].index(value_JudgeLine.kind), "Byte")
                 writer.write(value_JudgeLine.height, "Anim:Float")
                 writer.array(value_JudgeLine.notes, "Note")
-                writer.write(value_JudgeLine.color, "Color")
+                writer.write(value_JudgeLine.color, "Anim:Color")
                 writer.uleb(value_JudgeLine.parent +
                             1 if value_JudgeLine.parent else 0)
                 writer.write(value_JudgeLine.show_below, "Bool")
