@@ -214,3 +214,24 @@ class PhiraNote:
         self.fake = fake
         self.judge = judge
         """Not sure what this is for, from RPE only"""
+        self.end_time = None
+        self.end_height = None
+
+class PhiraHold(PhiraNote):
+    def __init__(
+        self,
+        time: float,
+        height: float,
+        end_time: float,
+        end_height: float,
+        kind: Literal["tap", "drag", "hold", "flick"] = "hold",
+        multiple_hint: bool = False,
+        object: PhiraObject = PhiraObject(),
+        speed: float = 1.,
+        above: bool = True,
+        fake: bool = False,
+        judge: Literal["NotJudged"] = "NotJudged",
+    ):
+        super().__init__(kind, time, height, multiple_hint, object, speed, above, fake, judge)
+        self.end_time = end_time
+        self.end_height = end_height

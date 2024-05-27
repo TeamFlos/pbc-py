@@ -3,7 +3,7 @@ from __future__ import annotations
 from io import BytesIO
 import struct
 from typing import Any, List, Literal, Tuple, TypeVar, Union
-from .phira_chart import PhiraAnim, PhiraBpmList, PhiraChart, PhiraChartSettings, PhiraControlObject, PhiraKeyFrame, PhiraLine, PhiraNote, PhiraObject
+from .phira_chart import PhiraAnim, PhiraBpmList, PhiraChart, PhiraChartSettings, PhiraControlObject, PhiraHold, PhiraKeyFrame, PhiraLine, PhiraNote, PhiraObject
 
 
 SupportBinName = Literal["Byte", "Bool", "Int", "Float", "String", "Color",
@@ -115,6 +115,9 @@ class BinaryData:
             case "Note":
                 object = reader.read("Object")
                 kind = ["tap", "hold", "flick", "drag"][reader.read("Byte")]
+                if kind == "hold":
+                    end_time = reader.read("Float")
+                    end_height = reader.read("Float")
                 time = reader.time()
                 height = reader.read("Float")
                 speedB = reader.read("Bool")
@@ -123,6 +126,18 @@ class BinaryData:
                     speed = reader.read("Float")
                 above = reader.read("Bool")
                 fake = reader.read("Bool")
+                if kind == "hold":
+                    return PhiraHold(
+                        object=object,
+                        kind=kind,
+                        time=time,
+                        height=height,
+                        speed=speed,
+                        above=above,
+                        fake=fake,
+                        end_time=end_time,
+                        end_height=end_height,
+                    )
                 return PhiraNote(
                     object=object,
                     kind=kind,
@@ -240,6 +255,10 @@ class BinaryData:
                 writer.write(value_Note.object, "Object")
                 writer.write(["tap", "hold", "flick", "drag"].index(
                     value_Note.kind), "Byte")
+                if isinstance(value_Note, PhiraHold):
+                    value_Hold: PhiraHold = value_Note
+                    writer.write(value_Hold.end_time, "Float")
+                    writer.write(value_Hold.end_height, "Float")
                 writer.time(value_Note.time)
                 writer.write(value_Note.height, "Float")
                 writer.write(value_Note.speed != 1.0, "Bool")
